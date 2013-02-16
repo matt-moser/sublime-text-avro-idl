@@ -1,0 +1,234 @@
+{ "name": "Avro IDL",
+  "scopeName": "source.avro.idl",
+  "fileTypes": ["avdl"],
+  "foldingStartMarker": "\\s*(/\\*.*|.*\\{)", 
+  "foldingStopMarker": ".*(\\*/|.*\\})", 
+  "patterns": [
+        {
+            "include": "#comments"
+        },
+        {
+            "include": "#keywords"
+        },
+        {
+            "include": "#constants-and-special-vars"
+        },
+        {
+            "include": "#strings"
+        },
+        {
+            "include": "#annotations"
+        },
+        {
+            "include": "#all-types"
+        }
+  ],
+  "repository": {
+        "all-types": {
+            "patterns": [ 
+                {
+                    "include": "#primitive-types"
+                },
+                {
+                    "include": "#object-types"
+                },
+                {
+                    "include": "#array-types"
+                }
+            ]
+        }, 
+        "comments": {
+            "patterns": [
+                {
+                    "captures": {
+                        "0": {
+                            "name": "punctuation.definition.comment.avro"
+                        }
+                    }, 
+                    "match": "/\\*\\*/", 
+                    "name": "comment.block.empty.avro"
+                }, 
+                {
+                    "include": "text.html.javadoc"
+                }, 
+                {
+                    "include": "#comments-inline"
+                }
+            ]
+        }, 
+        "comments-inline": {
+            "patterns": [
+                {
+                    "begin": "/\\*", 
+                    "captures": {
+                        "0": {
+                            "name": "punctuation.definition.comment.avro"
+                        }
+                    }, 
+                    "end": "\\*/", 
+                    "name": "comment.block.avro"
+                }, 
+                {
+                    "captures": {
+                        "1": {
+                            "name": "comment.line.double-slash.avro"
+                        }, 
+                        "2": {
+                            "name": "punctuation.definition.comment.avro"
+                        }
+                    }, 
+                    "match": "\\s*((//).*$\\n?)"
+                }
+            ]
+        },
+        "keywords": {
+            "patterns": [
+                {
+                    "match": "\\b(error|throws)\\b(?!`)", 
+                    "name": "keyword.control.error-handling.avro"
+                }, 
+                {
+                    "match": "\\b(protocol|record|union|fixed|enum)\\b(?!`)", 
+                    "name": "keyword.control.avro"
+                },
+                {
+                    "match": "(=)", 
+                    "name": "keyword.operator.assignment.avro"
+                },
+                {
+                    "match": ";", 
+                    "name": "punctuation.terminator.avro"
+                }
+            ]
+        },
+        "constants-and-special-vars": {
+            "patterns": [
+                {
+                    "match": "\\b(true|false|null)\\b", 
+                    "name": "constant.language.avro"
+                }, 
+                {
+                    "match": "\\b([A-Z0-9][A-Z0-9_]+)\\b", 
+                    "name": "constant.other.avro"
+                }
+            ]
+        },
+        "strings": {
+            "patterns": [
+                {
+                    "begin": "\"", 
+                    "beginCaptures": {
+                        "0": {
+                            "name": "punctuation.definition.string.begin.avro"
+                        }
+                    }, 
+                    "end": "\"", 
+                    "endCaptures": {
+                        "0": {
+                            "name": "punctuation.definition.string.end.avro"
+                        }
+                    }, 
+                    "name": "string.quoted.double.avro", 
+                    "patterns": [
+                        {
+                            "match": "\\\\.", 
+                            "name": "constant.character.escape.avro"
+                        }
+                    ]
+                }, 
+                {
+                    "begin": "'", 
+                    "beginCaptures": {
+                        "0": {
+                            "name": "punctuation.definition.string.begin.avro"
+                        }
+                    }, 
+                    "end": "'", 
+                    "endCaptures": {
+                        "0": {
+                            "name": "punctuation.definition.string.end.avro"
+                        }
+                    }, 
+                    "name": "string.quoted.single.avro", 
+                    "patterns": [
+                        {
+                            "match": "\\\\.", 
+                            "name": "constant.character.escape.avro"
+                        }
+                    ]
+                }
+            ]
+        },
+        "annotations": {
+            "patterns": [
+                {
+                    "begin": "(@[^ (]+)(\\()", 
+                    "beginCaptures": {
+                        "1": {
+                            "name": "storage.type.annotation.avro"
+                        }, 
+                        "2": {
+                            "name": "punctuation.definition.annotation-arguments.begin.avro"
+                        }
+                    }, 
+                    "end": "(\\))", 
+                    "endCaptures": {
+                        "1": {
+                            "name": "punctuation.definition.annotation-arguments.end.avro"
+                        }
+                    }, 
+                    "name": "meta.declaration.annotation.avro", 
+                    "patterns": [
+                        {
+                            "include": "#strings"
+                        }
+                    ]
+                }
+            ]
+        },
+        "primitive-types": {
+            "patterns": [
+                {
+                    "match": "\\b(?:string|void|boolean|bytes|int|float|long|double)\\b", 
+                    "name": "storage.type.primitive.avro"
+                }
+            ]
+        },
+        "object-types": {
+            "patterns": [
+                { 
+                    "match": "\\b[A-Z]+\\w*\\b", 
+                    "name": "storage.type.object.avro"
+                }
+            ]
+        },
+        "array-types": {
+            "patterns": [
+                {
+                    "begin": "(array)(\\<)", 
+                    "beginCaptures": {
+                        "1": {
+                            "name": "storage.type.array.avro"
+                        }, 
+                        "2": {
+                            "name": "punctuation.definition.array-arguments.begin.avro"
+                        }
+                    }, 
+                    "end": "(\\>)", 
+                    "endCaptures": {
+                        "1": {
+                            "name": "punctuation.definition.array-arguments.end.avro"
+                        }
+                    }, 
+                    "patterns": [
+                        {
+                            "include": "#all-types"
+                        }
+                    ],
+                    "name": "meta.declaration.array.avro"
+                }
+            ]
+        }
+  },
+  "uuid": "6d7d2277-ca4c-46f6-9cb1-d27ba7a38448"
+}
