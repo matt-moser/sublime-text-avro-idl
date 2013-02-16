@@ -4,6 +4,11 @@
  */
 @namespace("org.apache.avro.test")
 protocol Simple {
+  
+  import idl "foo.avdl";
+  import protocol "foo.avpr";
+  import schema "foo.avsc";
+  
   enum Kind {
     FOO,
     BAR, // the bar enum value

@@ -2,7 +2,7 @@
   "scopeName": "source.avro.idl",
   "fileTypes": ["avdl"],
   "foldingStartMarker": "\\s*(/\\*.*|.*\\{)", 
-  "foldingStopMarker": ".*(\\*/|.*\\})", 
+  "foldingStopMarker": ".*(\\*/|.*\\})",
   "patterns": [
         {
             "include": "#comments"
@@ -84,12 +84,12 @@
         "keywords": {
             "patterns": [
                 {
-                    "match": "\\b(error|throws)\\b(?!`)", 
-                    "name": "keyword.control.error-handling.avro"
+                    "match": "\\b(protocol|record|error|fixed|enum)\\b(?!`)", 
+                    "name": "keyword.schemata.avro"
                 }, 
                 {
-                    "match": "\\b(protocol|record|union|fixed|enum)\\b(?!`)", 
-                    "name": "keyword.control.avro"
+                    "match": "\\b(throws|import|union|idl|schema)\\b(?!`)", 
+                    "name": "keyword.other.avro"
                 },
                 {
                     "match": "(=)", 

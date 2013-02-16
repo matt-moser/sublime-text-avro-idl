@@ -234,15 +234,15 @@
 			<array>
 				<dict>
 					<key>match</key>
-					<string>\b(error|throws)\b(?!`)</string>
+					<string>\b(protocol|record|error|fixed|enum)\b(?!`)</string>
 					<key>name</key>
-					<string>keyword.control.error-handling.avro</string>
+					<string>keyword.schemata.avro</string>
 				</dict>
 				<dict>
 					<key>match</key>
-					<string>\b(protocol|record|union|fixed|enum)\b(?!`)</string>
+					<string>\b(throws|import|union|idl|schema)\b(?!`)</string>
 					<key>name</key>
-					<string>keyword.control.avro</string>
+					<string>keyword.other.avro</string>
 				</dict>
 				<dict>
 					<key>match</key>
